@@ -289,7 +289,7 @@ class LoopQuantifier:
         # plot images
         im2 = ax2.imshow(img, extent=self.extent_px, cmap='fall', vmin=0, vmax=np.nanquantile(img, 0.99))
         fig.colorbar(im2, cax=cax2, orientation='vertical')
-        ax2.set_title(f'local region (loop $\pm$ {int(self.local_region_size/1e3)} kb)')
+        ax2.set_title(fr'local region (loop $\pm$ {int(self.local_region_size/1e3)} kb)')
         
         eps = int((right_large_plot-left_large_plot)*0.1)
         zoomed_cmap = self.clr.matrix().fetch(f'{chr_name}:{left_large_plot-eps}-{right_large_plot+eps}',f'{chr_name}:{left_large_plot-eps}-{right_large_plot+eps}')

@@ -5,16 +5,16 @@ import pybedtools
 
 # import the loop quantification module
 import sys
-sys.path.insert(1, '/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_analysis_code')
+sys.path.insert(1, '../../')
 import looptools  # all the back end code is here
 
-loops = pd.read_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/filtered_loops.csv', index_col=0)
+loops = pd.read_csv('../../data/filtered_loops.csv', index_col=0)
 
-promoters_df = pd.read_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/mm39_TSS_pad_2kb.bed',sep='\t', header=None, names=('chr','start','end'))
+promoters_df = pd.read_csv('/../../data/mm39_TSS_pad_2kb.bed',sep='\t', header=None, names=('chr','start','end'))
 
-enhancers_df = pd.read_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/mm39_enhancers.bed', sep='\t', header=None, names=('chr','start','end'), index_col=None, usecols=[0,1,2])
+enhancers_df = pd.read_csv('../../data/mm39_enhancers.bed', sep='\t', header=None, names=('chr','start','end'), index_col=None, usecols=[0,1,2])
 
-CTCF_SMC1A_df = pd.read_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/mm39_CTCF_cohesin.bed',sep='\t', header=None, names=('chr','start','end','strand'), usecols=[0,1,2,5])
+CTCF_SMC1A_df = pd.read_csv('../../data/mm39_CTCF_cohesin.bed',sep='\t', header=None, names=('chr','start','end','strand'), usecols=[0,1,2,5])
 CTCF_SMC1A_pos_df = CTCF_SMC1A_df.loc[CTCF_SMC1A_df['strand']=='+']
 CTCF_SMC1A_neg_df = CTCF_SMC1A_df.loc[CTCF_SMC1A_df['strand']=='-']
 
@@ -168,9 +168,9 @@ loops['other_other'] = np.all((loops.C_L==False,  # no features L
 print(f'other-other: {np.sum(loops["other_other"])}')
 
 # append columns for loop scores
-scores = pd.read_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/MicroC_loop_quantification_scores.csv', index_col=0)
-scores['abs_loop_percent'] = scores.mean(1)*20.6  # slope of calibration curve from Figure 1
+scores = pd.read_csv('../../data/MicroC_loop_quantification_scores.csv', index_col=0)
+scores['abs_loop_percent'] = scores.mean(1)*16.1  # slope of calibration curve from Figure 1
 
 # save final dataframe containing all info
 final_df = pd.concat((loops, scores), axis=1)
-final_df.to_csv('/mnt/md0/jjusuf/absloopquant/AbsLoopQuant_data/final_loop_data.csv')
+final_df.to_csv('../../data/final_loop_data.csv')
