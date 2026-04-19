@@ -10,7 +10,7 @@ import looptools  # all the back end code is here
 
 loops = pd.read_csv('../../data/filtered_loops.csv', index_col=0)
 
-promoters_df = pd.read_csv('/../../data/mm39_TSS_pad_2kb.bed',sep='\t', header=None, names=('chr','start','end'))
+promoters_df = pd.read_csv('../../data/mm39_TSS_pad_2kb.bed',sep='\t', header=None, names=('chr','start','end'))
 
 enhancers_df = pd.read_csv('../../data/mm39_enhancers.bed', sep='\t', header=None, names=('chr','start','end'), index_col=None, usecols=[0,1,2])
 
